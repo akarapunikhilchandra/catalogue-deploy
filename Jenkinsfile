@@ -27,6 +27,7 @@ pipeline {
                 sh """
                 cd terraform
                 terraform init -reconfigure
+                terraform init
                 """
             }
         }
