@@ -22,7 +22,7 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                    echo "params $params.version"
+                    echo "params ${params.version}"
                 def params = [
                     string(name: 'version',value: $packageVersion)
                 ]
