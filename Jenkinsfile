@@ -36,17 +36,10 @@ pipeline {
             steps{
                 sh '''
                 cd terraform
-                terraform plan 
-                '''
-            }
-        }
-        stage('destroy'){
-            steps{
-                sh '''
                 terraform apply -auto-approve
                 '''
             }
         }
-
+       
     }
 }
