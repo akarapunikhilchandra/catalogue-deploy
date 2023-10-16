@@ -10,6 +10,9 @@
 
 pipeline {
     agent { node { label 'AGENT-1' } }
+    parameters {
+        string(name: 'version', defaultValue: '1.0.0', description: 'Who should I say hello to?')
+    }
     stages {
         stage('echo') {
             steps {
@@ -19,7 +22,7 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                    echo "params"
+                    echo "params $params.version"
                 def params = [
                     string(name: 'version',value: $packageVersion)
                 ]
