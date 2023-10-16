@@ -10,13 +10,32 @@
 
 pipeline {
     agent { node { label 'AGENT-1' } }
+    options {
+        ansiColor('xterm')
+    }
     parameters {
-        string(name: 'version', defaultValue: '1.0.0', description: 'Who should I say hello to?')
+        string(name: 'version', defaultValue: '1.0.0', description: 'which version to deploy ?')
     }
     stages {
         stage('echo') {
             steps {
                 echo "params ${params.version}"
+            }
+        }
+        stage('Init'){
+            steps{
+                sh """
+                cd terraform
+                terraform init -reconfigure
+                """
+            }
+        }
+        stage('Plan'){
+            steps{
+                sh """
+                cd terraform
+                terraform plan 
+                """
             }
         }
 
