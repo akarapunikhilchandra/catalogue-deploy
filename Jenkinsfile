@@ -16,19 +16,9 @@ pipeline {
     stages {
         stage('echo') {
             steps {
-                echo "HI I am a DOWNSTREAM JOB"
+                echo "params ${params.version}"
             }
         }
-        stage('deploy') {
-            steps {
-                script {
-                    echo "params ${params.version}"
-                def params = [
-                    string(name: 'version',value: $packageVersion)
-                ]
-                build job: "../catalogue-deploy",wait: true, parameters: params
-                }
-            }
-        }
+
     }
 }
