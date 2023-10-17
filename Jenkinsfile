@@ -22,16 +22,16 @@ pipeline {
                 echo "params ${params.version}"
             }
         }
-        stage('Init'){
-            steps{
-                sh '''
-                cd terraform
-                terraform init -upgrade
-                terraform init -reconfigure
+        // stage('Init'){
+        //     steps{
+        //         sh '''
+        //         cd terraform
+        //         terraform init -upgrade
+        //         terraform init -reconfigure
                 
-                '''
-            }
-        }
+        //         '''
+        //     }
+        // }
         stage('Plan'){
             steps{
                 sh '''
