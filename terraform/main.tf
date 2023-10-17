@@ -1,6 +1,6 @@
 module "catalogue_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  ami = data.aws_ami.devops_ami.id
+  ami = data.aws_ami.devops.id
   instance_type = "t3.medium"
   vpc_security_group_ids = [data.aws_ssm_parameter.catalogue_sg_id.value]
   # it should be in Roboshop DB subnet
