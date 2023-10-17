@@ -26,6 +26,7 @@ pipeline {
             steps{
                 sh '''
                 cd terraform
+                terraform init -upgrade
                 terraform init -reconfigure
                 
                 '''
