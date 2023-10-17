@@ -13,3 +13,7 @@ variable "common_tags" {
 variable "env" {
   default = "dev"
 }
+
+variable "app_version" {
+  
+}

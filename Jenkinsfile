@@ -14,7 +14,7 @@ pipeline {
         ansiColor('xterm')
     }
     parameters {
-        string(name: 'version', defaultValue: '1.0.0', description: 'which version to deploy ?')
+        string(name: 'version', defaultValue: '1.0.1', description: 'which version to deploy ?')
     }
     stages {
         stage('echo') {
@@ -35,7 +35,7 @@ pipeline {
             steps{
                 sh '''
                 cd terraform
-                terraform plan
+                terraform plan -var="app_version=${params.version}"
                 '''
             }
         }
