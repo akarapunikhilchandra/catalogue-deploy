@@ -27,7 +27,7 @@ pipeline {
                 sh """
                 cd terraform
                 terraform plan -var="app_version=${params.version}"
-                terraform destroy -var="app_version=1.3.3" -auto-approve
+                terraform apply -var="app_version=1.3.3" -auto-approve
                 """
             }
         }
