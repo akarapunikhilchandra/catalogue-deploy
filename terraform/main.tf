@@ -76,6 +76,7 @@ resource "aws_lb_target_group" "catalogue" {
   port     = 8080
   protocol = "HTTP"
   vpc_id   = data.aws_ssm_parameter.vpc_id.value 
+  deregistration_delay = 60
   health_check {
     enabled = true
     healthy_threshold = 2 #consider as healthy if 2 health checks are success 
