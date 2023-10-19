@@ -17,3 +17,7 @@ variable "env" {
 variable "app_version" {
   default = "1.5.0"
 }
+
+variable "domain_name" {
+  default = "joindevops.cloud"
+}
