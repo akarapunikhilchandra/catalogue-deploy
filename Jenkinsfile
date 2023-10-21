@@ -4,7 +4,7 @@ pipeline {
         ansiColor('xterm')
     }
     parameters {
-        string(name: 'version', defaultValue: '1.5.0', description: 'Which version to Deploy')
+        string(name: 'version', defaultValue: '1.3.0', description: 'Which version to Deploy')
     }
     stages {
         stage('Deploy'){
@@ -26,11 +26,33 @@ pipeline {
             steps{
                 sh """
                 cd terraform
-
-                terraform destroy -auto-approve
+                terraform plan -var="app_version=${params.version}"
                 """
             }
         }
+        stage('Approve') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+            }
+            steps {
+                echo "Hello, ${PERSON}, nice to meet you."
+            }
+        }
+
+        stage('Apply'){
+            steps{
+                sh """
+                cd terraform
+                terraform apply -var="app_version=${params.version}" -auto-approve
+                """
+            }
+        }
+        
     }
 
 
