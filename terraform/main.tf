@@ -170,3 +170,7 @@ resource "aws_lb_listener_rule" "catalogue" {
     }
   }
 }
+
+output "app_version" {
+  value = var.app_version
+}
