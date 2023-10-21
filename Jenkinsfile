@@ -48,7 +48,8 @@ pipeline {
             steps{
                 sh """
                 cd terraform
-                terraform apply -var="app_version=${params.version}" -auto-approve
+                terraform destroy -auto-approve
+
                 """
             }
         }
