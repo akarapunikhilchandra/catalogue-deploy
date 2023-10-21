@@ -4,7 +4,7 @@ pipeline {
         ansiColor('xterm')
     }
     parameters {
-        string(name: 'version', defaultValue: '1.4.0', description: 'Which version to Deploy')
+        string(name: 'version', defaultValue: '1.9.0', description: 'Which version to Deploy')
     }
     stages {
         stage('Deploy'){
