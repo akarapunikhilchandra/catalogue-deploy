@@ -23,10 +23,10 @@
 #   # Bootstrap script can run on any instance of the cluster
 #   # So we just choose the first in this case
 #   connection {
-#     type     = "ssh"
-#     user     = "centos"
+#     type = "ssh"
+#     user = "centos"
 #     password = "DevOps321"
-#     host     = module.catalogue_instance.private_ip
+#     host = module.catalogue_instance.private_ip
 #   }
 
 #   #copy the file
@@ -48,7 +48,7 @@
 # resource "aws_ec2_instance_state" "catalogue_instance" {
 #   instance_id = module.catalogue_instance.id
 #   state       = "stopped"
-#   depends_on = [null_resource.cluster]
+#   depends_on = [ null_resource.cluster ]
 # }
 
 
@@ -75,7 +75,7 @@
 #   name     = "${var.project_name}-${var.common_tags.component}-${var.env}"
 #   port     = 8080
 #   protocol = "HTTP"
-#   vpc_id   = data.aws_ssm_parameter.vpc_id.value 
+#   vpc_id   = data.aws_ssm_parameter.vpc_id.value
 #   deregistration_delay = 30
 #   health_check {
 #     enabled = true
@@ -113,7 +113,7 @@
 # }
 
 # resource "aws_autoscaling_group" "catalogue" {
-#   name                      = "${var.project_name}-${var.common_tags.component}-${var.env}"
+#   name                      = "${var.project_name}-${var.common_tags.component}-${var.env}-${local.current_time}"
 #   max_size                  = 3 
 #   min_size                  = 2
 #   health_check_grace_period = 300
@@ -163,8 +163,9 @@
 #     type             = "forward"
 #     target_group_arn = aws_lb_target_group.catalogue.arn 
 #   }
-#    condition {
-#     host_header {
+  
+#   condition {
+# 	host_header {
 #       # for dev it should be app-dev and for prod is should be app-prod
 #       values = ["${var.common_tags.component}.app-${var.env}.${var.domain_name}"]
 #     }
