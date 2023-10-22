@@ -22,14 +22,14 @@ pipeline {
                 """
             }
         }
-        stage('Plan'){
-            steps{
-                sh """
-                cd terraform
-                terraform plan -var="app_version=${params.version}"
-                """
-            }
-        }
+        // stage('Plan'){
+        //     steps{
+        //         sh """
+        //         cd terraform
+        //         terraform plan -var="app_version=${params.version}"
+        //         """
+        //     }
+        // }
         stage('Approve') {
             input {
                 message "Should we continue?"
