@@ -53,7 +53,7 @@ resource "aws_ec2_instance_state" "catalogue_instance" {
 
 
 resource "aws_ami_from_instance" "catalogue_ami" {
-  name               = "${var.common_tags.component}-${local.current_time}"
+  name               = "${var.common_tags.Component}-${local.current_time}"
   source_instance_id = module.catalogue_instance.id
   depends_on = [ aws_ec2_instance_state.catalogue_instance ]
 }
@@ -72,7 +72,7 @@ resource "null_resource" "delete_instance" {
 }
 
 resource "aws_lb_target_group" "catalogue" {
-  name     = "${var.project_name}-${var.common_tags.component}-${var.env}"
+  name     = "${var.project_name}-${var.common_tags.Component}-${var.env}"
   port     = 8080
   protocol = "HTTP"
   vpc_id   = data.aws_ssm_parameter.vpc_id.value 
