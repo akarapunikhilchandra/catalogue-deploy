@@ -15,7 +15,7 @@ variable "env" {
 }
 
 variable "app_version" {
-  default = "1.0.0"
+  default = "2.0.0"
 }
 
 variable "domain_name" {
