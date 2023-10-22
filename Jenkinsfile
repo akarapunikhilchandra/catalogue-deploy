@@ -4,7 +4,7 @@ pipeline {
         ansiColor('xterm')
     }
     parameters {
-        string(name: 'version', defaultValue: '2.0.0', description: 'Which version to Deploy')
+        string(name: 'version', defaultValue: '3.0.0', description: 'Which version to Deploy')
     }
     stages {
         stage('Deploy'){
@@ -48,7 +48,7 @@ pipeline {
             steps{
                 sh """
                 cd terraform
-                terraform apply -var="app_version=2.0.0" -auto-approve
+                terraform apply -var="app_version=3.0.0" -auto-approve
 
                 """
             }
