@@ -4,7 +4,8 @@ pipeline {
         ansiColor('xterm')
     }
     parameters {
-        string(name: 'version', defaultValue: '3.0.0', description: 'Which version to Deploy')
+        string(name: 'version', defaultValue: '3.0.0', description: 'Which version to Deploy'),
+        string(name: 'environment', defaultValue: 'dev', description: 'Which environment to Deploy')
     }
     stages {
         stage('Deploy'){
@@ -18,18 +19,18 @@ pipeline {
             steps{
                 sh """
                 cd terraform
-                terraform init -reconfigure
+                terraform init -backend-config=${params.environment}/backend.tf -reconfigure
                 """
             }
         }
-        // stage('Plan'){
-        //     steps{
-        //         sh """
-        //         cd terraform
-        //         terraform plan -var="app_version=${params.version}"
-        //         """
-        //     }
-        // }
+        stage('Plan'){
+            steps{
+                sh """
+                cd terraform
+                terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}"
+                """
+            }
+        }
         stage('Approve') {
             input {
                 message "Should we continue?"
@@ -48,7 +49,7 @@ pipeline {
             steps{
                 sh """
                 cd terraform
-                terraform destroy -auto-approve
+                terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
 
                 """
             }
