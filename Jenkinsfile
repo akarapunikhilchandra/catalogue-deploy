@@ -4,7 +4,7 @@ pipeline {
         ansiColor('xterm')
     }
     parameters {
-        string(name: 'version', defaultValue: '3.0.0', description: 'Which version to Deploy'),
+        string(name: 'version', defaultValue: '3.0.0', description: 'Which version to Deploy')
         string(name: 'environment', defaultValue: 'dev', description: 'Which environment to Deploy')
     }
     stages {
@@ -27,7 +27,7 @@ pipeline {
             steps{
                 sh """
                 cd terraform
-                terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}"
+                terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -var="env=${params.environment}"
                 """
             }
         }
@@ -49,7 +49,7 @@ pipeline {
             steps{
                 sh """
                 cd terraform
-                terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
+                terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -var="env=${params.environment}" -auto-approve
 
                 """
             }
