@@ -49,7 +49,7 @@ pipeline {
             steps{
                 sh """
                 cd terraform
-                terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -var="env=${params.environment}" -auto-approve
+                terraform destroy -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -var="env=${params.environment}" -auto-approve
 
                 """
             }
